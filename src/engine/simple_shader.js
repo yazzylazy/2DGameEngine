@@ -46,12 +46,27 @@ export default class SimpleShader{
    
 }
 
-function loadAndCompileShader(id, shaderType) {
-    let shaderSource = null, compiledShader = null;
+function loadAndCompileShader(filePath, shaderType) {
+
+    let xmlReq, shaderSource = null, compiledShader = null;
     let gl = main.getGL();
-    // Step A: Get the shader source from index.html
-    let shaderText = document.getElementById(id);
-    shaderSource = shaderText.firstChild.textContent;
+    // Step A: Request the text from the given file location.
+    xmlReq = new XMLHttpRequest();
+    xmlReq.open('GET', filePath, false);
+    try {
+     xmlReq.send();
+    } catch (error) {
+     throw new Error("Failed to load shader: "
+     + filePath
+     + " [Hint: you cannot double click to run this project. "
+     + "The index.html file must be loaded by a web-server.]");
+     return null;
+    }
+    shaderSource = xmlReq.responseText;
+    if (shaderSource === null) {
+     throw new Error("WARNING: Loading of:" + filePath + " Failed!");
+     return null;
+    }
     // Step B: Create shader based on type: vertex or fragment
     compiledShader = gl.createShader(shaderType);
     // Step C: Compile the created shader

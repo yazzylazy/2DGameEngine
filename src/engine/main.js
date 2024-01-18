@@ -8,7 +8,7 @@ var gGL = null;
 let mShader = null;
 
 function createShader() { 
-    mShader = new SimpleShader("VertexShader", "FragmentShader"); // from inside of index.html the shaders are defined
+    mShader = new SimpleShader("src/glsl_shaders/simple_vs.glsl", "src/glsl_shaders/white_fs.glsl"); // from inside of index.html the shaders are defined
 }
 
 function initializeGL() {
