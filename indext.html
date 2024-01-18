@@ -6,9 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>2DGameEngine</title>
 
-	<script type="module" src="src/main.js"></script>
-	<script type="module" src="src/VertexBuffer.js"></script>
-	<script type="module" src="src/shader_support.js"></script>
+	 <!-- Engine code -->
+	 <script type="module" src="src/engine/main.js"></script>
+	 <script type="module" src="src/engine/simple_shader.js"></script>
+	 <script type="module" src="src/engine/engine_vertexBuffer.js"></script>
+
+	 <!-- Client game code -->
+	 
+	 <script type="module" src="src/game/MyGame.js"></script>
 
 	<script type="x-shader/x-vertex" id="VertexShader">
 		// this is the vertex shader
