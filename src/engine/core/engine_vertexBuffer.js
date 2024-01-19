@@ -1,5 +1,5 @@
 "use strict";
-import * as main from "./main.js"
+import * as main from "./engine_core.js"
 
 let mGLVertexBuffer = null;
 function get() {return mGLVertexBuffer;}

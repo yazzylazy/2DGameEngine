@@ -1,5 +1,5 @@
-import * as main from "./main.js"; // access as main module
-import * as vertexBuffer from "./engine_vertexBuffer.js"; //vertexBuffer module
+import * as main from "./core/engine_core.js"; // access as main module
+import * as vertexBuffer from "./core/engine_vertexBuffer.js"; //vertexBuffer module
 
 export default class SimpleShader{
     //instance variables

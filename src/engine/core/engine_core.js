@@ -1,6 +1,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 import * as vertexBuffer from "./engine_vertexBuffer.js"
-import SimpleShader from "./simple_shader.js"
+import SimpleShader from "../simple_shader.js"
+import * as renderable from "../renderable.js"
 
 var gGL = null;
 
