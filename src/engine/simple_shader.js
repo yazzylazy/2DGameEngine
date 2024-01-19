@@ -3,6 +3,7 @@ import * as vertexBuffer from "./engine_vertexBuffer.js"; //vertexBuffer module
 
 export default class SimpleShader{
     //instance variables
+    
 
     //constructor
     constructor(vertexShaderID, fragmentShaderID) {
@@ -10,6 +11,7 @@ export default class SimpleShader{
         // Convention: all instance variables: mVariables
         this.mCompiledShader = null; // ref to compiled shader in webgl
         this.mVertexPositionRef = null; // ref to VertexPosition in shader
+        this.mPixelColor = null;
 
         let gl = main.getGL();
 
@@ -32,15 +34,18 @@ export default class SimpleShader{
         // Step D: reference to aVertexPosition attribute in the shaders
         this.mVertexPositionRef = gl.getAttribLocation(
         this.mCompiledShader, "aVertexPosition");
+
+        this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor");
     }
 
-    activate() {
+    activate(pixelColor) {
         let gl = main.getGL();
         gl.useProgram(this.mCompiledShader);
         // bind vertex buffer
-        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer.get());
+       // gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer.get());
         gl.vertexAttribPointer(this.mVertexPositionRef,3,gl.FLOAT,false,0, 0); 
         gl.enableVertexAttribArray(this.mVertexPositionRef);
+        gl.uniform4fv(this.mPixelColor, pixelColor);
     }
 
    

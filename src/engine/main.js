@@ -4,13 +4,6 @@ import SimpleShader from "./simple_shader.js"
 
 var gGL = null;
 
-// The shader
-let mShader = null;
-
-function createShader() { 
-    mShader = new SimpleShader("src/glsl_shaders/simple_vs.glsl", "src/glsl_shaders/white_fs.glsl"); // from inside of index.html the shaders are defined
-}
-
 function initializeGL() {
     // the "GLCanvas" defined in the index.html file
     var canvas = document.getElementById("GLCanvas");
@@ -39,7 +32,6 @@ function clearCanvas(color) {
 function init(htmlCanvasID) {
     initializeGL();    // setup mGL
     vertexBuffer.init()  // setup mGLVertexBuff   
-    createShader(); // create the shader
   };
 
 
