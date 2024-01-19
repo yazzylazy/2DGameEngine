@@ -16,10 +16,10 @@ class MyGame {
         this.mWhiteSq = new Renderable(this.mConstColorShader);
         this.mWhiteSq.setColor([1, 1, 1, 1]);
         this.mRedSq = new Renderable(this.mConstColorShader);
-        this.mRedSq.setColor([1, 0, 0, 1]);
+        this.mRedSq.setColor([1, 0, 1, 0.5]);
 
         // Step B: Clear the canvas
-        engine.clearCanvas([0, 0.8, 0, 1]);
+        engine.clearCanvas([0, 0, 0, 1]);
 
         // Step D1: Draw Renderable objects with the white shader
         this.mWhiteSq.draw();
