@@ -8,8 +8,9 @@ export default function Renderable(shader) {
 Renderable.prototype.setColor = function(color) { this.mColor = color; };
 Renderable.prototype.getColor = function() { return this.mColor; };
 
-Renderable.prototype.draw = function() {
+Renderable.prototype.draw = function(modelTransform) {
 	var gl = engine.getGL();
 	this.mShader.activate(this.mColor);
+	this.mShader.loadObjectTransform(modelTransform);
 	gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

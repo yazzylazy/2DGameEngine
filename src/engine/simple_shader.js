@@ -1,4 +1,4 @@
-import * as main from "./core/engine_core.js"; // access as main module
+import * as engine from "./core/engine_core.js"; // access as engine module
 import * as vertexBuffer from "./core/engine_vertexBuffer.js"; //vertexBuffer module
 
 export default class SimpleShader{
@@ -12,8 +12,9 @@ export default class SimpleShader{
         this.mCompiledShader = null; // ref to compiled shader in webgl
         this.mVertexPositionRef = null; // ref to VertexPosition in shader
         this.mPixelColor = null;
+        this.mModelTransform = null;
 
-        let gl = main.getGL();
+        let gl = engine.getGL();
 
         // Step A: load and compile vertex and fragment shaders
         this.mVertexShader = loadAndCompileShader(vertexShaderID,gl.VERTEX_SHADER);
@@ -35,11 +36,14 @@ export default class SimpleShader{
         this.mVertexPositionRef = gl.getAttribLocation(
         this.mCompiledShader, "aVertexPosition");
 
-        this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor");
+        // Step E: Gets a reference to the uniform variables:
+        // uPixelColor and uModelTransform
+        this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor"); 
+        this.mModelTransform = gl.getUniformLocation(this.mCompiledShader,"uModelTransform");
     }
 
     activate(pixelColor) {
-        let gl = main.getGL();
+        let gl = engine.getGL();
         gl.useProgram(this.mCompiledShader);
         // bind vertex buffer
        // gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer.get());
@@ -48,13 +52,20 @@ export default class SimpleShader{
         gl.uniform4fv(this.mPixelColor, pixelColor);
     }
 
+    // Loads per-object model transform to the vertex shader
+    loadObjectTransform(modelTransform) {
+        var gl = engine.getGL();
+        gl.uniformMatrix4fv(this.mModelTransform, false, modelTransform);
+    };
+
    
 }
+
 
 function loadAndCompileShader(filePath, shaderType) {
 
     let xmlReq, shaderSource = null, compiledShader = null;
-    let gl = main.getGL();
+    let gl = engine.getGL();
     // Step A: Request the text from the given file location.
     xmlReq = new XMLHttpRequest();
     xmlReq.open('GET', filePath, false);
